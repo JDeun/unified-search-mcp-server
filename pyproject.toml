@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "unified-search-mcp"
+version = "1.0.0"
+description = "A unified MCP server for searching Google Scholar, Google Web, and YouTube"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "JDeun", email = "your.email@example.com"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+keywords = ["mcp", "search", "google-scholar", "youtube", "google-search", "api"]
+
+dependencies = [
+    "fastmcp>=0.1.0",
+    "scholarly>=1.7.0",
+    "httpx>=0.25.0",
+    "aiohttp>=3.9.0",
+    "cachetools>=5.3.0",
+    "asyncio>=3.4.3"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=22.0",
+    "flake8>=5.0",
+    "mypy>=1.0"
+]
+
+[project.scripts]
+unified-search-mcp = "unified_search_server:main"
+
+[project.urls]
+"Homepage" = "https://github.com/JDeun/unified-search-mcp-server"
+"Bug Reports" = "https://github.com/JDeun/unified-search-mcp-server/issues"
+"Source" = "https://github.com/JDeun/unified-search-mcp-server"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*.py"]
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+# Smithery MCP Server Configuration
+[project.mcp-server]
+name = "unified-search-mcp"
+version = "1.0.0"
+description = "Unified search across Google Scholar, Web, and YouTube"
+repository = "https://github.com/JDeun/unified-search-mcp-server"
+homepage = "https://github.com/JDeun/unified-search-mcp-server"
+license = "MIT"

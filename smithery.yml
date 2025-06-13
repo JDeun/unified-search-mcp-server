@@ -1,0 +1,53 @@
+name: unified-search-mcp
+version: 1.0.0
+description: Unified search across Google Scholar, Web, and YouTube
+author: JDeun
+repository: https://github.com/JDeun/unified-search-mcp-server
+license: MIT
+
+server:
+  command: python
+  args:
+    - unified_search_server.py
+  env:
+    GOOGLE_API_KEY: "${GOOGLE_API_KEY}"
+    GOOGLE_CUSTOM_SEARCH_ENGINE_ID: "${GOOGLE_CUSTOM_SEARCH_ENGINE_ID}"
+    YOUTUBE_API_KEY: "${YOUTUBE_API_KEY}"
+
+requirements:
+  python: ">=3.10"
+  
+config:
+  google_api_key:
+    type: string
+    description: "Google Custom Search API Key (for web search)"
+    required: false
+    env: GOOGLE_API_KEY
+  google_custom_search_engine_id:
+    type: string
+    description: "Google Custom Search Engine ID (NOT for Google Scholar)"
+    required: false
+    env: GOOGLE_CUSTOM_SEARCH_ENGINE_ID
+  youtube_api_key:
+    type: string
+    description: "YouTube Data API v3 Key"
+    required: false
+    env: YOUTUBE_API_KEY
+
+tools:
+  - name: search_google_scholar
+    description: "Search for academic papers on Google Scholar"
+  - name: search_google_scholar_advanced
+    description: "Advanced search with author and year filters"
+  - name: search_google_web
+    description: "Search the web using Google Custom Search API"
+  - name: search_youtube
+    description: "Search for YouTube videos with filters"
+  - name: unified_search
+    description: "Search across all sources simultaneously"
+  - name: get_author_info
+    description: "Get author information from Google Scholar"
+  - name: clear_cache
+    description: "Clear search result caches"
+  - name: get_api_usage_stats
+    description: "Monitor API usage and quotas"
