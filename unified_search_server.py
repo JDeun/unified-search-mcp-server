@@ -759,4 +759,12 @@ Unified Search MCP Server 🔍
 """
 
 if __name__ == "__main__":
-    mcp.run()
+    import sys
+    import os
+    
+    # Smithery 환경에서는 HTTP 모드로 실행
+    if os.environ.get("SMITHERY_ENV") or "--transport" in sys.argv:
+        mcp.run(transport="http", port=8000)
+    else:
+        # 로컬 개발시 stdio 모드
+        mcp.run()
