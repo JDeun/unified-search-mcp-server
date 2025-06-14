@@ -5,7 +5,7 @@ author: JDeun
 repository: https://github.com/JDeun/unified-search-mcp-server
 license: MIT
 
-runtime: container
+runtime: typescript
 
 startCommand:
   type: http
