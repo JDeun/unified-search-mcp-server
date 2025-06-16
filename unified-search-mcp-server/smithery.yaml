@@ -1,0 +1,114 @@
+name: unified-search-mcp
+version: 1.0.0
+description: 통합 검색 MCP 서버 - Google Scholar, Web, YouTube를 하나의 인터페이스로
+author: JDeun
+repository: https://github.com/JDeun/unified-search-mcp-server
+license: MIT
+
+runtime: python
+
+# Python 실행 설정
+build:
+  python: "3.11"
+  requirements: "requirements.txt"
+
+# 서버 시작 명령
+startCommand:
+  command: "python"
+  args: ["unified_search_server.py", "--transport", "streamable-http"]
+  
+# 환경 변수 설정
+configSchema:
+  type: object
+  properties:
+    # API 키 설정
+    GOOGLE_API_KEY:
+      type: string
+      title: "Google API Key"
+      description: "Google Custom Search API 키 (웹 검색에 필요)"
+      pattern: "^[A-Za-z0-9\\-_]+$"
+    
+    GOOGLE_CUSTOM_SEARCH_ENGINE_ID:
+      type: string
+      title: "Google CSE ID"
+      description: "Google Custom Search Engine ID (웹 검색에 필요)"
+      pattern: "^[A-Za-z0-9\\-_:]+$"
+    
+    YOUTUBE_API_KEY:
+      type: string
+      title: "YouTube API Key"
+      description: "YouTube Data API v3 키 (YouTube 검색에 필요)"
+      pattern: "^[A-Za-z0-9\\-_]+$"
+    
+    # 선택적 설정
+    MCP_REDIS_URL:
+      type: string
+      title: "Redis URL (선택)"
+      description: "분산 캐싱을 위한 Redis 연결 URL"
+      default: ""
+      pattern: "^(redis://.*)?$"
+    
+    MCP_LOG_LEVEL:
+      type: string
+      title: "로그 레벨"
+      description: "로깅 레벨 설정"
+      default: "INFO"
+      enum: ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+    
+    MCP_CACHE_TTL:
+      type: integer
+      title: "캐시 TTL (초)"
+      description: "검색 결과 캐시 유지 시간"
+      default: 3600
+      minimum: 60
+      maximum: 86400
+    
+    MCP_RATE_LIMIT_ENABLED:
+      type: boolean
+      title: "Rate Limiting 활성화"
+      description: "API 보호를 위한 rate limiting"
+      default: true
+    
+    MCP_MAX_RESULTS:
+      type: integer
+      title: "최대 결과 수"
+      description: "소스별 최대 검색 결과 수"
+      default: 50
+      minimum: 1
+      maximum: 100
+      
+  required: []  # 모든 필드는 선택사항
+
+# 환경 변수
+env:
+  PYTHONUNBUFFERED: "1"
+  MCP_ENV: "production"
+  SMITHERY_ENV: "true"
+
+# 기능 설명
+features:
+  - "Google Scholar 학술 논문 검색"
+  - "Google Custom Search 웹 검색"
+  - "YouTube 동영상 검색"
+  - "통합 검색 (모든 소스 동시 검색)"
+  - "저자 정보 조회"
+  - "지능형 캐싱 시스템"
+  - "Rate limiting 보호"
+  - "상세한 에러 처리"
+
+# 지원 도구
+tools:
+  - name: "unified_search"
+    description: "모든 소스에서 동시에 검색"
+  - name: "search_google_scholar"
+    description: "학술 논문 검색"
+  - name: "search_google_web"
+    description: "웹 검색"
+  - name: "search_youtube"
+    description: "YouTube 동영상 검색"
+  - name: "get_author_info"
+    description: "저자 정보 조회"
+  - name: "clear_cache"
+    description: "캐시 초기화"
+  - name: "get_api_usage_stats"
+    description: "API 사용량 통계"
