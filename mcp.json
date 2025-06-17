@@ -1,0 +1,15 @@
+{
+  "name": "unified-search-mcp",
+  "version": "1.0.0",
+  "description": "통합 검색 MCP 서버 - Google Scholar, Web, YouTube를 하나의 인터페이스로",
+  "author": "JDeun",
+  "license": "MIT",
+  "runtime": "python",
+  "main": "unified_search_server.py",
+  "commands": {
+    "start": "python unified_search_server.py --transport streamable-http"
+  },
+  "dependencies": {
+    "python": "3.11"
+  }
+}
