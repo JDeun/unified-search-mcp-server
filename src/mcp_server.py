@@ -437,23 +437,26 @@ def run_server():
         logger.error(f"Failed to initialize services: {e}")
         raise
     
+    # Get port from environment variable (Smithery requirement)
+    port = int(os.environ.get("PORT", settings.port))
+    
     # Determine transport mode
     if "--transport" in sys.argv:
         idx = sys.argv.index("--transport") + 1
         if idx < len(sys.argv):
             transport = sys.argv[idx]
             if transport == "streamable-http":
-                mcp.run(transport="streamable-http", port=settings.port)
+                mcp.run(transport="streamable-http", port=port)
             elif transport == "sse":
-                mcp.run(transport="sse", port=settings.port)
+                mcp.run(transport="sse", port=port)
             else:
                 mcp.run(transport=transport)
         else:
             mcp.run()
     elif os.environ.get("SMITHERY_ENV"):
         # Smithery deployment
-        logger.info("Detected Smithery environment, running in HTTP mode")
-        mcp.run(transport="streamable-http", port=settings.port)
+        logger.info(f"Detected Smithery environment, running in HTTP mode on port {port}")
+        mcp.run(transport="streamable-http", port=port)
     else:
         # Default stdio mode
         logger.info("Running in stdio mode")
