@@ -10,6 +10,7 @@ build:
   dockerfile: "Dockerfile"
   dockerBuildPath: "."
 
+# Smithery HTTP 설정
 startCommand:
   type: "http"
   configSchema:

@@ -28,5 +28,6 @@ ENV SMITHERY_ENV=true
 # PORT 환경변수를 사용하도록 설정 (Smithery 요구사항)
 EXPOSE 8080
 
-# 서버 실행 - Smithery wrapper 사용
-CMD ["python", "smithery_server.py", "--transport", "streamable-http"]
+# 서버 실행 - uvicorn으로 ASGI 앱 실행
+# PORT 환경변수를 동적으로 사용
+CMD python smithery_server.py
