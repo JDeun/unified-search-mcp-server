@@ -4,44 +4,4 @@ description: 통합 검색 MCP 서버 - Google Scholar, Web, YouTube를 하나�
 author: JDeun
 license: MIT
 
-runtime: "container"
-
-build:
-  dockerfile: "Dockerfile"
-  dockerBuildPath: "."
-
-# Smithery HTTP 설정
-startCommand:
-  type: "http"
-  configSchema:
-    type: "object"
-    properties:
-      GOOGLE_API_KEY:
-        type: "string"
-        description: "Google Custom Search API 키 (웹 검색에 필요)"
-      GOOGLE_CUSTOM_SEARCH_ENGINE_ID:
-        type: "string"
-        description: "Google Custom Search Engine ID (웹 검색에 필요)"
-      YOUTUBE_API_KEY:
-        type: "string"
-        description: "YouTube Data API v3 키 (YouTube 검색에 필요)"
-      MCP_LOG_LEVEL:
-        type: "string"
-        description: "로깅 레벨"
-        default: "INFO"
-        enum: ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
-    required: []
-  exampleConfig:
-    GOOGLE_API_KEY: "your-google-api-key"
-    GOOGLE_CUSTOM_SEARCH_ENGINE_ID: "your-cse-id"
-    YOUTUBE_API_KEY: "your-youtube-api-key"
-
-# MCP 도구 목록
-tools:
-  - unified_search
-  - search_google_scholar
-  - search_google_web
-  - search_youtube
-  - get_author_info
-  - clear_cache
-  - get_api_usage_stats
+runtime: python  # 이게 핵심! Python 런타임 명시
