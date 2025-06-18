@@ -1,28 +1,28 @@
 #!/usr/bin/env python3
 """
-Unified Search MCP Server
-Main entry point for the MCP server
+Unified Search MCP Server for Smithery
 """
 import sys
 import os
-import asyncio
-from pathlib import Path
+
+# Smithery environment detection
+if os.environ.get("SMITHERY_ENV"):
+    # For Smithery deployment
+    port = int(os.environ.get("PORT", 8080))
+    transport = "streamable-http"
+else:
+    # For local development
+    port = 8000
+    transport = "stdio"
 
 # Add src to Python path
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(os.path.dirname(os.path.abspath(__file__))))
 
-from src.mcp_server import run_server
+from src.mcp_server import mcp, _initialize_services
 
 if __name__ == "__main__":
-    # Check for Windows event loop policy
-    if sys.platform == "win32":
-        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+    # Initialize services
+    _initialize_services()
     
-    try:
-        run_server()
-    except KeyboardInterrupt:
-        print("\nServer stopped by user")
-        sys.exit(0)
-    except Exception as e:
-        print(f"Server error: {e}")
-        sys.exit(1)
+    # Run server
+    mcp.run(transport=transport, port=port, host="0.0.0.0")
