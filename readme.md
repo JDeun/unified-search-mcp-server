@@ -32,6 +32,14 @@
 
 ## 🛠️ 설치
 
+### Installing via Smithery
+
+To install Unified Search MCP Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@JDeun/unified-search-mcp-server):
+
+```bash
+npx -y @smithery/cli install @JDeun/unified-search-mcp-server --client claude
+```
+
 ### Smithery를 통한 빠른 설치
 
 Smithery 플랫폼을 통해 직접 배포하면 자동으로 설정됩니다.
