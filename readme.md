@@ -4,6 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![smithery badge](https://smithery.ai/badge/@JDeun/unified-search-mcp-server)](https://smithery.ai/server/@JDeun/unified-search-mcp-server)
 
 ## 🚀 주요 기능
 
